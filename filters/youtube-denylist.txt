@@ -1,0 +1,11 @@
+! Title: YouTube Denylist (allow YouTube Studio)
+! Description: Blocks youtube.com and youtu.be so videos can't be watched,
+!              while explicitly allowing studio.youtube.com so you can still
+!              manage and upload to your channel.
+! Homepage: https://github.com/Flashbangxxx/Youtube-denylist
+! Updated: 2026-07-07
+
+||youtube.com^$document
+||youtu.be^$document
+
+@@||studio.youtube.com^$document
