@@ -53,7 +53,7 @@
 	<key>PayloadRemovalDisallowed</key>
 	<false/>
 	<key>PayloadScope</key>
-	<string>System</string>
+	<string>User</string>
 	<key>PayloadType</key>
 	<string>Configuration</string>
 	<key>PayloadUUID</key>
