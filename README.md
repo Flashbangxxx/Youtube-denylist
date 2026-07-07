@@ -1,69 +1,71 @@
 # Youtube-denylist
 
-A Brave browser filter list that blocks `youtube.com` / `youtu.be` (so you
-can't fall into watching videos) while still allowing `studio.youtube.com`
-(so you can manage and upload to your channel).
+A macOS configuration profile for Brave that blocks `youtube.com` /
+`youtu.be` (so you can't fall into watching videos) while still allowing
+`studio.youtube.com` (so you can manage and upload to your channel).
 
-It works as a **Brave Shields custom filter list**, applied to a dedicated
-Brave profile so your other profiles are unaffected.
+## Install (macOS)
 
-## What's in this repo
+1. Download
+   [`profile/brave-youtube-denylist.mobileconfig`](profile/brave-youtube-denylist.mobileconfig)
+   (click it, then "Download raw file").
+2. Double-click the downloaded file. macOS opens **System Settings**.
+3. Go to **General → Device Management** (macOS Sonoma/Ventura) or
+   **Profiles** (older macOS), select **"YouTube Denylist for Brave"**, and
+   click **Install**. Enter your Mac password if asked.
+4. Quit and reopen Brave.
 
-- [`filters/youtube-denylist.txt`](filters/youtube-denylist.txt) — the filter
-  rules, in Adblock Plus / uBlock syntax (the format Brave's Shields engine
-  uses):
+That's it — Brave is now configured to block YouTube while still allowing
+YouTube Studio, for your whole Brave install (all profiles/windows under
+your macOS user account).
 
-  ```
-  ||youtube.com^$document
-  ||youtu.be^$document
+### How it works
 
-  @@||studio.youtube.com^$document
-  ```
+The profile sets Brave's (Chromium) `URLBlocklist` / `URLAllowlist` managed
+policies:
 
-  - `||youtube.com^$document` blocks any page load under `youtube.com`
-    (including `www.youtube.com`, `m.youtube.com`, `music.youtube.com`, etc.)
-  - `||youtu.be^$document` blocks YouTube's short-link domain.
-  - `@@||studio.youtube.com^$document` is an **exception rule** that
-    re-allows `studio.youtube.com`, since it's a subdomain that would
-    otherwise be caught by the first rule.
+```
+URLBlocklist: ["youtube.com", "youtu.be"]
+URLAllowlist: ["studio.youtube.com"]
+```
 
-## Setup: create a dedicated Brave profile
+- `youtube.com` in the blocklist blocks that domain and all its subdomains
+  (`www.youtube.com`, `m.youtube.com`, `music.youtube.com`, etc.).
+- `studio.youtube.com` in the allowlist is more specific than the
+  blocklist entry, so per Chromium's policy rules it wins and stays
+  reachable.
+- `youtu.be` (YouTube's short-link domain) is blocked too.
 
-1. Open Brave, click your **profile icon** (top-right corner) → **Add
-   Person**.
-2. Name it something like `YouTube Denylist`, pick an icon, and click
-   **Add**. Brave opens a new window for this profile — do the rest of the
-   steps in that window, so only this profile is affected.
-3. Go to `brave://settings/shields/filters`.
-4. Under **Custom filter lists**, click **Add filter list by URL** and
-   paste:
+Because this uses Brave's built-in enterprise policy support rather than
+Shields/ad-block, it can't be turned off from inside Brave's UI (e.g. by
+toggling Shields) — only by removing the profile in System Settings.
 
-   ```
-   https://raw.githubusercontent.com/Flashbangxxx/Youtube-denylist/main/filters/youtube-denylist.txt
-   ```
+### Verify it works
 
-   Brave will fetch it and periodically re-check it for updates. (If you'd
-   rather not depend on a live URL, use the **Custom filters** text box
-   further down the same page instead, and paste the three rules above
-   directly.)
-5. Make sure Shields is turned **on** for this profile (it's on by
-   default). The custom filter list is enforced regardless of whether
-   Shields is set to Standard or Aggressive.
+- Visit `youtube.com` → Brave shows a "blocked by your organization" page.
+- Visit `studio.youtube.com` → loads normally, so you can sign in and
+  post/manage videos.
+- `brave://policy` will list `URLBlocklist` / `URLAllowlist` as active,
+  and `brave://settings` will show "Managed by your organization" — that's
+  expected, it's just how Brave reports that a config profile is applied.
 
-## Verify it works
+### Removing it
 
-- In the `YouTube Denylist` profile, visit `youtube.com` → Shields should
-  block the page.
-- Visit `studio.youtube.com` → it should load normally, so you can sign in
-  and post/manage videos.
-- Your other Brave profiles are untouched — this filter list only applies
-  to the profile you added it to.
+System Settings → General → Device Management (or Profiles) → select
+"YouTube Denylist for Brave" → the **−** button → confirm. Restart Brave
+afterward.
 
-## Notes
+## Alternative: Shields custom filter list (per Brave profile only)
 
-- To temporarily lift the block (e.g. you genuinely need YouTube for
-  something), either switch to a different Brave profile, or go back to
-  `brave://settings/shields/filters` and remove/disable the custom list.
-- If you ever want to also block YouTube embedded on other websites, you
-  can add `||youtube.com/embed^` (without `$document`) as an extra rule,
-  though this will also break legitimate embedded videos on other sites.
+If you'd rather scope the block to a single Brave "Person" profile instead
+of your whole Mac account, [`filters/youtube-denylist.txt`](filters/youtube-denylist.txt)
+is an Adblock/uBlock-style filter list you can add under
+`brave://settings/shields/filters` → **Add filter list by URL**:
+
+```
+https://raw.githubusercontent.com/Flashbangxxx/Youtube-denylist/main/filters/youtube-denylist.txt
+```
+
+This is easier to toggle off (just remove the filter list from Shields
+settings), which is a downside if the point is to resist temptation, but
+useful if you want the block on one profile only.

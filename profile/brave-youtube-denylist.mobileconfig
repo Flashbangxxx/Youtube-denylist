@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadContent</key>
+			<dict>
+				<key>com.brave.Browser</key>
+				<dict>
+					<key>Forced</key>
+					<array>
+						<dict>
+							<key>mcx_preference_settings</key>
+							<dict>
+								<key>URLBlocklist</key>
+								<array>
+									<string>youtube.com</string>
+									<string>youtu.be</string>
+								</array>
+								<key>URLAllowlist</key>
+								<array>
+									<string>studio.youtube.com</string>
+								</array>
+							</dict>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+			<key>PayloadDisplayName</key>
+			<string>Brave Browser Policy</string>
+			<key>PayloadIdentifier</key>
+			<string>com.github.flashbangxxx.youtube-denylist.brave-policy</string>
+			<key>PayloadOrganization</key>
+			<string>Youtube-denylist</string>
+			<key>PayloadType</key>
+			<string>com.apple.ManagedClient.preferences</string>
+			<key>PayloadUUID</key>
+			<string>75EF74FB-3D35-4AB8-97AA-AAD034C701E2</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Blocks youtube.com and youtu.be in Brave, while still allowing studio.youtube.com so you can manage and upload to your channel.</string>
+	<key>PayloadDisplayName</key>
+	<string>YouTube Denylist for Brave</string>
+	<key>PayloadIdentifier</key>
+	<string>com.github.flashbangxxx.youtube-denylist</string>
+	<key>PayloadOrganization</key>
+	<string>Youtube-denylist</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadScope</key>
+	<string>User</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>F5133395-5A2B-46CF-9640-8D5945C73F65</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
