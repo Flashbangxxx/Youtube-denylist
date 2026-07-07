@@ -1,8 +1,13 @@
 # Youtube-denylist
 
-A macOS configuration profile for Brave that blocks `youtube.com` /
-`youtu.be` (so you can't fall into watching videos) while still allowing
-`studio.youtube.com` (so you can manage and upload to your channel).
+A macOS **device-level** configuration profile for Brave that blocks
+`youtube.com` / `youtu.be` (so you can't fall into watching videos) while
+still allowing `studio.youtube.com` (so you can manage and upload to your
+channel).
+
+This is a **System**-scope profile: it applies to Brave for every macOS
+user account on the Mac (not just the account that installed it), and
+requires an admin password to install and to remove.
 
 ## Install (macOS)
 
@@ -12,12 +17,13 @@ A macOS configuration profile for Brave that blocks `youtube.com` /
 2. Double-click the downloaded file. macOS opens **System Settings**.
 3. Go to **General → Device Management** (macOS Sonoma/Ventura) or
    **Profiles** (older macOS), select **"YouTube Denylist for Brave"**, and
-   click **Install**. Enter your Mac password if asked.
+   click **Install**. You'll be prompted for an **administrator** password
+   — this is a device-level (System) profile, so it needs admin rights to
+   install.
 4. Quit and reopen Brave.
 
 That's it — Brave is now configured to block YouTube while still allowing
-YouTube Studio, for your whole Brave install (all profiles/windows under
-your macOS user account).
+YouTube Studio, device-wide, for every account on this Mac.
 
 ### How it works
 
@@ -52,8 +58,8 @@ toggling Shields) — only by removing the profile in System Settings.
 ### Removing it
 
 System Settings → General → Device Management (or Profiles) → select
-"YouTube Denylist for Brave" → the **−** button → confirm. Restart Brave
-afterward.
+"YouTube Denylist for Brave" → the **−** button → enter your admin
+password → confirm. Restart Brave afterward.
 
 ## Alternative: Shields custom filter list (per Brave profile only)
 
